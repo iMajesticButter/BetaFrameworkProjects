@@ -1,0 +1,7 @@
+﻿  Level1.cpp
+d:\user\documents\github\betaframeworkprojects\intro\source\level1.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  BetaLowLevelTemplate.vcxproj -> D:\User\Documents\GitHub\BetaFrameworkProjects\Intro\\x64\Debug\BetaExamples.exe
+  LowLevelAPI\lib\BetaLow_x64_D.dll
+  1 File(s) copied
+  FreeType\lib\win64\freetype.dll
+  1 File(s) copied
