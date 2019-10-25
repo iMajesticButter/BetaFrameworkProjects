@@ -8,7 +8,7 @@
 #include <Windows.h>
 
 // Constructor
-Lab1::Lab1() : Beta::BetaObject("Lab1"), pi(M_PI), lineLength(2), rotationalVelocity(1.0/60.0) {
+Lab1::Lab1() : Beta::BetaObject("Lab1"), pi((float)M_PI), lineLength(2.0f), rotationalVelocity(1.0f/60.0f) {
 
 }
 
@@ -42,7 +42,7 @@ void Lab1::Update(float dt) {
 	GraphicsEngine* Graphics = EngineGetModule(GraphicsEngine);
 	Camera* cam = &Graphics->GetDefaultCamera();
 
-	debug->AddCircle(Vector2D(0, 0), lineLength+0.2, *cam, Colors::Blue);
+	debug->AddCircle(Vector2D(0, 0), lineLength+0.2f, *cam, Colors::Blue);
 
 	//angles
 	angle1 -= (rotationalVelocity*pi*2) * dt;
@@ -57,8 +57,8 @@ void Lab1::Update(float dt) {
 	//std::cout << sHandAngle * 57.2958 << std::endl;
 
 	p = Vector2D(cos(sHandAngle), sin(sHandAngle)) * lineLength;
-	q = Vector2D(cos(angle2), sin(angle2)) * lineLength/1.2;
-	r = Vector2D(cos(angle3), sin(angle3)) * lineLength/1.4;
+	q = Vector2D(cos(angle2), sin(angle2)) * lineLength/1.2f;
+	r = Vector2D(cos(angle3), sin(angle3)) * lineLength/1.4f;
 
 	//draw markings
 	for (int i = 0; i < 60; ++i) {
@@ -67,8 +67,8 @@ void Lab1::Update(float dt) {
 			length *= 2;
 		}
 
-		Vector2D start = Vector2D(cos(i * pi / 30), sin(i * pi / 30)) * (lineLength + 0.2);
-		Vector2D end = start.Normalized() * ((lineLength + 0.2) - length);
+		Vector2D start = Vector2D(cos(i * pi / 30), sin(i * pi / 30)) * (lineLength + 0.2f);
+		Vector2D end = start.Normalized() * ((lineLength + 0.2f) - length);
 
 		debug->AddLineToList(start, end, Colors::Blue);
 

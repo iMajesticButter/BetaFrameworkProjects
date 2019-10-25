@@ -1,0 +1,13 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (D:\User\Documents\GitHub\BetaFrameworkProjects\Lab1... again\\x64\Debug\) contains files shared from another project (*.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Level1.cpp
+  CS230Lab1.vcxproj -> D:\User\Documents\GitHub\BetaFrameworkProjects\Lab1... again\\x64\Debug\CS230Lab1.exe
+  LowLevelAPI\lib\BetaLow_x64_D.dll
+  1 File(s) copied
+  FreeType\lib\win64\freetype.dll
+  1 File(s) copied
+  HighLevelAPI\lib\BetaHigh_x64_D.dll
+  1 File(s) copied
+  FMOD\lib\fmodL64.dll
+  1 File(s) copied
+  FMOD\lib\fmodstudioL64.dll
+  1 File(s) copied
