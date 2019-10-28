@@ -1,0 +1,5 @@
+﻿  Level1.cpp
+  Level2.cpp
+  Generating Code...
+d:\user\documents\github\betaframeworkprojects\lab2\source\level2.cpp(103): error C4716: 'Level2::CreateShip': must return a value
+d:\user\documents\github\betaframeworkprojects\lab2\source\level2.cpp(110): error C4716: 'Level2::CreateBulletArchetype': must return a value
