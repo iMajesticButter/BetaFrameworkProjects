@@ -46,12 +46,14 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	
 	// TO DO: Add additional modules to engine
 	SpaceManager& spaceManager = *engine.AddModule<SpaceManager>();
-	//GameObjectFactory& factory = *engine.AddModule<GameObjectFactory>();
+	GameObjectFactory& factory = *engine.AddModule<GameObjectFactory>();
 
 	// TO DO: Set initial game state to the first level.
 	spaceManager.GetDefaultSpace().SetLevel<Level1>();
 
 	// TO DO: Register PlayerShip and TimedDeath
+	factory.RegisterComponent<PlayerShip>();
+	factory.RegisterComponent<TimedDeath>();
 
 	// Game engine goes!
 	StartupSettings settings;

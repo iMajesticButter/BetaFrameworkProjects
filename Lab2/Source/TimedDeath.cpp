@@ -26,7 +26,8 @@ using namespace Beta;
 
 // Params:
 //   timeUntilDeath = Amount of time until the object self-destructs.
-TimedDeath::TimedDeath(float timeUntilDeath) : Beta::Component("TimedDeath") {
+TimedDeath::TimedDeath(float _timeUntilDeath) : Beta::Component("TimedDeath"),
+	timeUntilDeath(_timeUntilDeath) {
 
 }
 
@@ -34,21 +35,25 @@ TimedDeath::TimedDeath(float timeUntilDeath) : Beta::Component("TimedDeath") {
 // Params:
 //   dt = The (fixed) change in time since the last step.
 void TimedDeath::Update(float dt) {
-
+	timeUntilDeath -= dt;
+	if (timeUntilDeath <= 0) {
+		GetOwner()->Destroy();
+	}
 }
 
 // Write object data to file
 // Params:
 //   parser = The parser that is writing this object to a file.
 void TimedDeath::Serialize(Beta::FileStream& parser) const {
-
+	
+	parser.WriteVariable<float>("timeUntilDeath", timeUntilDeath);
 }
 
 // Read object data from a file
 // Params:
 //   parser = The parser that is reading this object's data from a file.
 void TimedDeath::Deserialize(Beta::FileStream& parser) {
-
+	parser.ReadVariable<float>("timeUntilDeath", timeUntilDeath);
 }
 
 // Student code goes here.

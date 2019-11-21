@@ -5,7 +5,7 @@
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
 //
-// Copyright © 2018 DigiPen (USA) Corporation.
+// Copyright ï¿½ 2018 DigiPen (USA) Corporation.
 //
 //------------------------------------------------------------------------------
 
@@ -50,8 +50,8 @@ public:
 	//   maximumSpeed  = Maximum attainable speed of the ship.
 	//   rotationSpeed = Speed at which the ship rotates.
 	//   bulletSpeed   = Speed at which bullets move when fired by ship.
-	PlayerShip(Beta::Archetype bulletArchetype = Beta::Archetype(), float forwardThrust = 3.0f, 
-		float maximumSpeed = 2.0f, float rotationSpeed = 3.14159f, float bulletSpeed = 4.0f);
+	PlayerShip(Beta::Archetype bulletArchetype = Beta::Archetype(), float forwardThrust = 3.0f,
+		float maximumSpeed = 2.0f, float rotationSpeed = 6.28318f, float bulletSpeed = 4.0f, float angularDrag = 0.9f);
 
 	// Initialize this component (happens at object creation).
 	void Initialize() override;
@@ -80,7 +80,7 @@ private:
 	void Move() const;
 
 	// Rotate when left or right arrow key is pressed
-	void Rotate() const;
+	void Rotate(float dt) const;
 
 	// Shoot projectiles when space is pressed
 	void Shoot() const;
@@ -94,6 +94,7 @@ private:
 	float maximumSpeed;
 	float rotationSpeed;
 	float bulletSpeed;
+	float angularDrag;
 
 	// Bullet archetype
 	Beta::Archetype bulletArchetype;

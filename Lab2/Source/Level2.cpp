@@ -15,6 +15,8 @@
 
 #include "Level1.h"
 #include "Level2.h"
+#include "PlayerShip.h"
+#include "TimedDeath.h"
 
 #include <sstream>
 
@@ -36,19 +38,23 @@ void Level2::Load() {
 	EngineGetModule(Beta::GraphicsEngine)->SetBackgroundColor(Beta::Colors::Black);
 
 	shipTexture = Beta::ResourceGetTexture("ship.png");
-	shipSpriteSource = std::make_shared<Beta::SpriteSource>(shipTexture, "Ship", 1, 1);
+	//shipSpriteSource = std::make_shared<Beta::SpriteSource>(shipTexture, "Ship", 1, 1);
 
 	bulletTexture = Beta::ResourceGetTexture("bullet.png");
-	bulletSpriteSource = std::make_shared<Beta::SpriteSource>(shipTexture, "Bullet", 1, 1);
+	//bulletSpriteSource = std::make_shared<Beta::SpriteSource>(shipTexture, "Bullet", 1, 1);
 
-	bulletArchetype = Beta::Archetype(CreateBulletArchetype());
+	//bulletArchetype = Beta::Archetype(CreateBulletArchetype());
+
+	//bulletArchetype = Beta::ResourceGetArchetype("Bullet");
 
 }
 
 // Initialize the memory associated with the Level 2.
 void Level2::Initialize() {
 	std::cout << "Level2::Initialize" << std::endl;
-	GetSpace()->GetObjectManager().AddObject(*CreateShip());
+	//GetSpace()->GetObjectManager().AddObject(*CreateShip());
+	Beta::GameObject* ship = new Beta::GameObject(Beta::ResourceGetArchetype("PlayerShip"));
+	GetSpace()->GetObjectManager().AddObject(*ship);
 
 
 	ScanlineEffect = new Beta::PostEffect("scanline.frag");
@@ -66,7 +72,7 @@ void Level2::Initialize() {
 void Level2::Update(float dt) {
 	std::stringstream windowTitle;
 
-	windowTitle << "Bullets alive: " << 1;
+	windowTitle << "Bullets alive: " << GetSpace()->GetObjectManager().GetObjectCount("Bullet");
 
 	EngineGetModule(Beta::WindowSystem)->SetWindowTitle(windowTitle.str());
 
@@ -99,14 +105,54 @@ void Level2::Shutdown() {
 // Returns:
 //	 A pointer to the newly constructed game object
 Beta::GameObject* Level2::CreateShip(void) {
+	Beta::GameObject* ship = new Beta::GameObject("PlayerShip");
+	
+	Beta::Transform* transform = new Beta::Transform;
+	transform->SetScale(Beta::Vector2D(0.5f, 0.5f));
 
+	Beta::Sprite* sprite = new Beta::Sprite;
+	sprite->SetSpriteSource(shipSpriteSource);
+	sprite->SetColor(Beta::Colors::Blue);
+
+	Beta::RigidBody* rigidBody = new Beta::RigidBody;
+
+	PlayerShip* playership = new PlayerShip(bulletArchetype);
+
+	ship->AddComponent(transform);
+	ship->AddComponent(sprite);
+	ship->AddComponent(rigidBody);
+	ship->AddComponent(playership);
+
+	EngineGetModule(Beta::GameObjectFactory)->SaveObjectToFile(ship);
+
+	return ship;
 }
 
 // Create a game object archetype that uses the Bullet sprite source.
 // Returns:
 //	 A pointer to the newly constructed game object
 Beta::GameObject* Level2::CreateBulletArchetype(void) {
+	Beta::GameObject* bullet = new Beta::GameObject("Bullet");
 
+	Beta::Transform* transform = new Beta::Transform;
+	transform->SetScale(Beta::Vector2D(0.07f, 0.07f));
+
+	Beta::Sprite* sprite = new Beta::Sprite;
+	sprite->SetSpriteSource(bulletSpriteSource);
+	sprite->SetColor(Beta::Colors::Yellow);
+
+	Beta::RigidBody* rigidBody = new Beta::RigidBody;
+
+	TimedDeath* timedDeath = new TimedDeath(5);
+
+	bullet->AddComponent(transform);
+	bullet->AddComponent(sprite);
+	bullet->AddComponent(rigidBody);
+	bullet->AddComponent(timedDeath);
+
+	EngineGetModule(Beta::GameObjectFactory)->SaveObjectToFile(bullet);
+
+	return bullet;
 }
 
 	

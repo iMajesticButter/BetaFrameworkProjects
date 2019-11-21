@@ -1,0 +1,40 @@
+Asteroid
+{
+	numComponents : 7
+	Transform
+	{
+		translation : { 0, 0 }
+		rotation : 0
+		scale : { 0.5, 0.5 }
+	}
+	Sprite
+	{
+		spriteSource : Asteroid
+		color : { 1 , 1 , 1 , 1 }
+		zDepth : 0
+	}
+	RigidBody
+	{
+		velocity : { 0, 0 }
+		angularVelocity : 0
+		mass : 1
+	}
+	ScreenWrap
+	{
+	}
+	ColliderCircle
+	{
+		radius : 0.25
+	}
+	Cutable
+	{
+	}
+	Asteroid
+	{
+		speedMin : 0.25
+		speedMax : 2
+		basePointsValue : 10
+		sizePointsModifier : 2
+		maxSplits : 3
+	}
+}

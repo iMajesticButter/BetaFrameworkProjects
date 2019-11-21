@@ -1,0 +1,5 @@
+Asteroid {
+	numRows : 1
+	numCols : 1
+	texture : asteroid.png
+}
